@@ -9,18 +9,16 @@ def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            # Create user but don't save yet
-            user = form.save(commit=False)
-            
-            # Hash the password properly
-            password = form.cleaned_data['password']
-            user.set_password(password)
-            
-            # Save the user
-            user.save()
-            
+            user = form.save(commit=False)       # Do NOT save yet
+            user.set_password(form.cleaned_data['password'])  # Hash password
+            user.save()                          # Now save correctly
             messages.success(request, 'Account created successfully! Please log in.')
             return redirect('login')
+        else:
+            # This will show validation errors
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     else:
         form = RegisterForm()
     return render(request, 'accounts/register.html', {'form': form})

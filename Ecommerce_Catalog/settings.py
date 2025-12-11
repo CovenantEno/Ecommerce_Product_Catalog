@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-jvr199tl*&$!tpn&6usij@ifhd77or7t4+b0+sgni_tf@g6n^z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -135,12 +135,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
+    'ecommerce-product-catalog-5.onrender.com',
     'localhost',
-    'ecommerce-product-catalog-5.onrender.com'
+    '127.0.0.1'
 ]
 
 CSRF_TRUSTED_ORIGINS = [

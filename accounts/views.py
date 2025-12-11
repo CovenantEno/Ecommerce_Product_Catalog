@@ -42,7 +42,7 @@ def login_view(request):
     else:
         form = LoginForm()
 
-    return render(request, 'accounts/home.html', {'form': form})
+    return render(request, 'catalog/home.html', {'form': form})
 
 def logout_view(request):
     logout(request)

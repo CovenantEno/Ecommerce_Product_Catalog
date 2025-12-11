@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'accounts',  # Custom user accounts app
-    'catalog'  # Product catalog app
+    'catalog',  # Product catalog app
     'cloudinary',
     'cloudinary_storage',
 ]

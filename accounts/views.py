@@ -5,39 +5,23 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 
+
+
+
 def register_view(request):
+    # Show registration form (do not redirect even if user is authenticated)
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)       # Do NOT save yet
-            user.set_password(form.cleaned_data['password'])  # Hash password
-            user.save()                          # Now save correctly
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
             messages.success(request, 'Account created successfully! Please log in.')
-            return redirect('login')
-        else:
-            # This will show validation errors
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+            return redirect('login')   # namespace removed
     else:
         form = RegisterForm()
-    return render(request, 'accounts/register.html', {'form': form})
-
-
-# def register_view(request):
-#     # Show registration form (do not redirect even if user is authenticated)
-#     if request.method == "POST":
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.set_password(form.cleaned_data['password'])
-#             user.save()
-#             messages.success(request, 'Account created successfully! Please log in.')
-#             return redirect('login')   # namespace removed
-#     else:
-#         form = RegisterForm()
     
-#     return render(request, 'accounts/register.html', {'form': form})
+    return render(request, 'accounts/register.html', {'form': form})
 
 def login_view(request):
     # Show login view (do not auto-redirect even if user is authenticated)

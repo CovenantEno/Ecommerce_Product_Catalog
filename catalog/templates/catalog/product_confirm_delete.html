@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Delete Product{% endblock %}
+
+{% block content %}
+  <div class="card p-4 shadow-sm" style="max-width:650px;">
+    <h1 class="mb-3">Delete Product</h1>
+
+    <p>Are you sure you want to delete <strong>{{ product.name }}</strong>?</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button class="btn btn-danger" type="submit">Yes, delete</button>
+      <a class="btn btn-secondary" href="{% url 'product_list' %}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

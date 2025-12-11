@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Categories</h1>
+    <a class="btn btn-primary" href="{% url 'category_create' %}">Add Category</a>
+  </div>
+
+  <div class="list-group shadow-sm">
+    {% for c in categories %}
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="mb-1">{{ c.name }}</h5>
+          <p class="mb-1 text-muted">{{ c.description|default:'No description' }}</p>
+        </div>
+
+        <div>
+          <a class="btn btn-sm btn-outline-primary" href="{% url 'category_update' c.slug %}">Edit</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'category_delete' c.slug %}">Delete</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>No categories yet.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'catalog/base.html' %}
+{% block title %}{% if category %}Edit Category{% else %}Add Category{% endif %}{% endblock %}
+
+{% block content %}
+  <h1 class="mb-3">{% if category %}Edit Category{% else %}Add Category{% endif %}</h1>
+
+  <div class="card p-4 shadow-sm" style="max-width:600px;">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <button class="btn btn-primary" type="submit">Save</button>
+      <a class="btn btn-secondary" href="{% url 'category_list' %}">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

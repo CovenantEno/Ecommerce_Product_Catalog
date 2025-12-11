@@ -5,21 +5,41 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 
-
 def register_view(request):
-    # Show registration form (do not redirect even if user is authenticated)
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
+            # Create user but don't save yet
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
+            
+            # Hash the password properly
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            
+            # Save the user
             user.save()
+            
             messages.success(request, 'Account created successfully! Please log in.')
-            return redirect('login')   # namespace removed
+            return redirect('login')
     else:
         form = RegisterForm()
-    
     return render(request, 'accounts/register.html', {'form': form})
+
+
+# def register_view(request):
+#     # Show registration form (do not redirect even if user is authenticated)
+#     if request.method == "POST":
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.set_password(form.cleaned_data['password'])
+#             user.save()
+#             messages.success(request, 'Account created successfully! Please log in.')
+#             return redirect('login')   # namespace removed
+#     else:
+#         form = RegisterForm()
+    
+#     return render(request, 'accounts/register.html', {'form': form})
 
 def login_view(request):
     # Show login view (do not auto-redirect even if user is authenticated)

@@ -124,3 +124,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://ecommerce-product-catalog-2.onrender.com'
+]
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'ecommerce-product-catalog-2.onrender.com'
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

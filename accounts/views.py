@@ -29,7 +29,7 @@ def login_view(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=username, password=password)
             if user:
                 login(request, user)
                 messages.success(request, f'Welcome back, {user.first_name or user.username}!')

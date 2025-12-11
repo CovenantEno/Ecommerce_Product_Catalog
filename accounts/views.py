@@ -11,7 +11,7 @@ def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=True)
+            user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
             messages.success(request, 'Account created successfully! Please log in.')
